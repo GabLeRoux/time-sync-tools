@@ -1,0 +1,10 @@
+jira_instances:
+  - name: "Instance1"
+    base_url: "https://instance1.atlassian.net"
+    api_token: "token1"
+    user_email: "email1@example.com"
+
+  - name: "Instance2"
+    base_url: "https://instance2.atlassian.net"
+    api_token: "token2"
+    user_email: "email2@example.com"
