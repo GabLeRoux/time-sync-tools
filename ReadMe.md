@@ -35,12 +35,13 @@ _This is a technical project which requires you to understand the APIs of the se
 
 Here's how I use this project.
 
-* I track my time using Toggl or Clockify and use their **reporting tools** to export a **CSV file**.
-* I manually import this CSV into Google Sheets (This part could be automated) with some predefined tabs.
+1. I track my time using Toggl or Clockify and use their **reporting tools** to export a **CSV file**.
+2. I manually import this CSV into Google Sheets (This part could be automated) with some predefined tabs.
   * These predefined tabs allow me to manage and review my time entries from Toggl or Clockify as my “source of truth.”
   * Recently, I switched from Toggl to Clockify but kept Toggl support in the project for others who may still use it. ;)
-* After reviewing the data in Google Sheets, I run specific commands to sync these entries directly to Jira, Wrike, or other platforms.
-* This workflow uses Google Sheets as a review step, giving me control before syncing data to other platforms.
+3. After reviewing the data in Google Sheets, I run specific commands to sync these entries directly to Jira, Wrike, or other platforms.
+
+This workflow uses Google Sheets as a review step, giving me control before syncing data to other platforms.
 
 ## Getting Started
 
