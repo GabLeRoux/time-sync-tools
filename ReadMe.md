@@ -46,7 +46,7 @@ Here's how I use this project.
 
 ### Prerequisites
 
-- Python 3.12+
+- Python 3.11+
 - API keys and tokens for each service:
     - [**Toggl** API key](https://toggl.com/app/profile)
     - [**Wrike** API Token (OAuth 2.0 Authorization)](https://developers.wrike.com/oauth-20-authorization/)
