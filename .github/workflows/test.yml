@@ -33,6 +33,11 @@ jobs:
     - name: Install dependencies
       run: uv pip sync requirements.txt --system
 
+    - name: Prepare environment
+      run: |
+        cp config.example.yaml config.yaml
+        cp .env.example .env
+
     - name: Run tests
       run: pytest --cov=./
 
