@@ -45,7 +45,8 @@ jobs:
       id: test
       run: |
         source .venv/bin/activate
-        pytest --cov=./ --cov-report=xml --cov-report=html || echo "Tests failed"
+        pytest --cov=./ --cov-report=xml --cov-report=html
+        echo "$?" > test_exit_code.txt  # Store pytest exit code in a file
       continue-on-error: true
 
     - name: Upload Coverage Report as Artifact
@@ -61,5 +62,9 @@ jobs:
       if: always()
 
     - name: Fail workflow if tests failed
-      if: steps.test.outcome != 'success'
-      run: exit 1
+      run: |
+        exit_code=$(cat test_exit_code.txt)  # Retrieve stored exit code
+        if [ "$exit_code" -ne 0 ]; then
+          echo "Tests failed with exit code $exit_code."
+          exit $exit_code
+        fi
