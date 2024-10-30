@@ -238,13 +238,15 @@ Replace `YOUR_SPREADSHEET_ID` and `SHEET_TITLE` with the appropriate values in e
 
 #### Jira
 
-###### Log time to a Jira task
+##### Log time to a Jira task
 
 ```bash
 python main.py jira log_time_to_task --task_id="TASK_ID" --start_datetime="YYYY-MM-DD HH:MM:SS" --time_spent_seconds=SECONDS --comment="COMMENT"
 ```
 
-###### Delete all worklogs for a user on a specific day
+##### Delete all worklogs for a user on a specific day
+
+> ⚠️ **Warning**: This operation permanently deletes worklogs. Always use --dry_run=True first to verify the affected entries.
 
 ```bash
 python main.py jira delete_all_worklogs_for_user_on_given_day --date="YYYY-MM-DD" --dry_run=True
