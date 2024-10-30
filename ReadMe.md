@@ -15,13 +15,29 @@ _This is a technical project which requires you to understand the APIs of the se
       * [Jira configuration](#jira-configuration)
     * [Usage](#usage)
       * [Toggl](#toggl)
+        * [Retrieve time entries for a specific date range](#retrieve-time-entries-for-a-specific-date-range)
+        * [Create a new time entry](#create-a-new-time-entry)
       * [Wrike](#wrike)
+        * [List all projects](#list-all-projects)
+        * [List all folders](#list-all-folders)
+        * [List all tasks](#list-all-tasks)
+        * [Fetch a specific task by its ID](#fetch-a-specific-task-by-its-id)
       * [Clockify](#clockify)
+        * [Retrieve time entries for a date range](#retrieve-time-entries-for-a-date-range)
+        * [Create a new time entry](#create-a-new-time-entry-1)
       * [OpenAI](#openai)
+        * [Find the closest match from a list of options](#find-the-closest-match-from-a-list-of-options)
+        * [Use a different model for matching](#use-a-different-model-for-matching)
       * [Google Sheets](#google-sheets)
         * [Obtaining `credentials.json`](#obtaining-credentialsjson)
-        * [Google Sheets Commands:](#google-sheets-commands)
+        * [Google Sheets Commands](#google-sheets-commands)
+          * [Sync Data from Google Sheets to Jira](#sync-data-from-google-sheets-to-jira)
+          * [Fetch Data from a Google Sheet](#fetch-data-from-a-google-sheet)
+          * [Sync Wrike Tasks to Google Sheets](#sync-wrike-tasks-to-google-sheets)
+          * [Sync Data from Google Sheets to Wrike](#sync-data-from-google-sheets-to-wrike)
       * [Jira](#jira)
+          * [Log time to a Jira task](#log-time-to-a-jira-task)
+          * [Delete all worklogs for a user on a specific day](#delete-all-worklogs-for-a-user-on-a-specific-day)
   * [Development](#development)
     * [Managing dependencies](#managing-dependencies)
     * [Using local environment with uv](#using-local-environment-with-uv)
@@ -96,13 +112,13 @@ Then update the `config.yaml` file with your Jira configuration details. You can
 
 #### Toggl
 
-Retrieve time entries for a specific date range:
+##### Retrieve time entries for a specific date range
 
 ```bash
 python main.py toggl get_time_entries --start_date=YYYY-MM-DD --end_date=YYYY-MM-DD
 ```
 
-Create a new time entry:
+##### Create a new time entry
 
 ```bash
 python main.py toggl add_time_entry --description="DESCRIPTION" --start_time="YYYY-MM-DDTHH:MM:SS" --end_time="YYYY-MM-DDTHH:MM:SS"
@@ -110,25 +126,25 @@ python main.py toggl add_time_entry --description="DESCRIPTION" --start_time="YY
 
 #### Wrike
 
-List all projects:
+##### List all projects
 
 ```bash
 python main.py wrike list_all_projects
 ```
 
-List all folders:
+##### List all folders
 
 ```bash
 python main.py wrike list_all_folders
 ```
 
-List all tasks:
+##### List all tasks
 
 ```bash
 python main.py wrike get_all_tasks
 ```
 
-Fetch a specific task by its ID:
+##### Fetch a specific task by its ID
 
 ```bash
 python main.py wrike get_task_by_id --task_id=YOUR_TASK_ID
@@ -138,13 +154,13 @@ Manage timelogs (list, create, delete) for tasks. See commands for details.
 
 #### Clockify
 
-Retrieve time entries for a date range:
+##### Retrieve time entries for a date range
 
 ```bash
 python main.py clockify get_time_entries --start_date=YYYY-MM-DD --end_date=YYYY-MM-DD
 ```
 
-Create a new time entry:
+##### Create a new time entry
 
 ```bash
 python main.py clockify add_time_entry --description="DESCRIPTION" --start_time="YYYY-MM-DDTHH:MM:SS" --end_time="YYYY-MM-DDTHH:MM:SS"
@@ -152,13 +168,13 @@ python main.py clockify add_time_entry --description="DESCRIPTION" --start_time=
 
 #### OpenAI
 
-Find the closest match from a list of options:
+##### Find the closest match from a list of options
 
 ```bash
 python main.py openai find_closest_match --search_param="SEARCH_TERM" --options="option1,option2,option3"
 ```
 
-Use a different model for matching:
+##### Use a different model for matching
 
 ```bash
 python main.py openai find_closest_match --search_param="SEARCH_TERM" --options="option1,option2,option3" --model="MODEL_NAME"
@@ -170,44 +186,65 @@ python main.py openai find_closest_match --search_param="SEARCH_TERM" --options=
 
 1. Go to the [Google Developers Console](https://console.developers.google.com/).
 2. Create a new project or select an existing one.
-3. Navigate to the "APIs & Services > Dashboard" panel and click on “ENABLE APIS AND SERVICES”.
-4. Search for "Google Sheets API" and enable it.
-5. In the "Credentials" tab, click on "Create credentials" and choose "OAuth client ID".
-6. If prompted, configure the consent screen, and then set the application type to "Desktop app".
+3. Navigate to the **APIs & Services > Dashboard** panel and click on **ENABLE APIS AND SERVICES**.
+4. Search for **Google Sheets API** and enable it.
+5. In the **Credentials** tab, click on **Create credentials** and choose **OAuth client ID**.
+6. If prompted, configure the consent screen, then set the application type to **Desktop app**.
 7. Download the JSON file and rename it to `credentials.json`.
-8. Place `credentials.json` in the root directory of your project or specify the path in your `google_sheets.py` file
+8. Place `credentials.json` in the root directory of your project or specify the path in your `google_sheets.py` file.
 
-##### Google Sheets Commands:
+##### Google Sheets Commands
 
-Sync Wrike tasks to Google Sheets:
+###### Sync Data from Google Sheets to Jira
+
+Synchronizes time logs from Google Sheets to Jira. Use the Jira project key as the client name.
 
 ```bash
-python main.py google_sheets sync_wrike_to_sheets --spreadsheet_id="YOUR_SPREADSHEET_ID"
+python main.py google_sheets sync --client="jira_project_key_from_config"
 ```
 
-Fetch data from a Google Sheet:
+Replace `jira_project_key_from_config` with your configured Jira project key.
+
+###### Fetch Data from a Google Sheet
+
+Retrieves data from the specified sheet title within a Google Sheets document.
 
 ```bash
 python main.py google_sheets fetch_data_from_sheet --title="SHEET_TITLE" --spreadsheet_id="YOUR_SPREADSHEET_ID"
 ```
 
-Create time logs from Google Sheets data in Wrike:
+Replace `SHEET_TITLE` and `YOUR_SPREADSHEET_ID` with your specific values.
+
+###### Sync Wrike Tasks to Google Sheets
+
+Syncs task data from Wrike to Google Sheets by creating or updating a specific sheet.
 
 ```bash
-python main.py google_sheets sheet_to_create_time_logs_from_data --title="SHEET_TITLE" --spreadsheet_id="YOUR_SPREADSHEET_ID" --dry_run=True
+python main.py google_sheets sync_wrike_to_sheets --spreadsheet_id="YOUR_SPREADSHEET_ID"
 ```
 
-Replace `YOUR_SPREADSHEET_ID` and `SHEET_TITLE` with the appropriate values. Use `--dry_run=True` for testing without making changes.
+Replace `YOUR_SPREADSHEET_ID` with your Google Sheet ID.
+
+###### Sync Data from Google Sheets to Wrike
+
+Transfers data from Google Sheets to Wrike, creating time logs based on the provided data. Use `--dry_run=True` for testing without making changes in Wrike.
+
+```bash
+python main.py google_sheets sync_sheet_to_wrike --title="SHEET_TITLE" --spreadsheet_id="YOUR_SPREADSHEET_ID" --dry_run=True
+```
+
+Replace `YOUR_SPREADSHEET_ID` and `SHEET_TITLE` with the appropriate values in each command. Use `--dry_run=True` for testing mode to validate data without making changes in the target platform.
+
 
 #### Jira
 
-Log time to a Jira task:
+###### Log time to a Jira task
 
 ```bash
 python main.py jira log_time_to_task --task_id="TASK_ID" --start_datetime="YYYY-MM-DD HH:MM:SS" --time_spent_seconds=SECONDS --comment="COMMENT"
 ```
 
-Delete all worklogs for a user on a specific day:
+###### Delete all worklogs for a user on a specific day
 
 ```bash
 python main.py jira delete_all_worklogs_for_user_on_given_day --date="YYYY-MM-DD" --dry_run=True
