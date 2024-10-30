@@ -41,13 +41,10 @@ jobs:
         cp config.example.yaml config.yaml
         cp .env.example .env
 
-    - name: Run tests with coverage
-      id: test
+    - name: Run tests
       run: |
-        source .venv/bin/activate
-        pytest --cov=./ --cov-report=xml --cov-report=html
-        echo "exit_code=$?" >> $GITHUB_OUTPUT
-      continue-on-error: true
+        pytest --cov=./ || exit_code=$?
+        echo "exit_code=$exit_code" >> $GITHUB_ENV
 
     - name: Upload Coverage Report as Artifact
       uses: actions/upload-artifact@v4
@@ -61,10 +58,14 @@ jobs:
         token: ${{ secrets.CODECOV_TOKEN }}
       if: always()
 
-    - name: Fail workflow if tests failed
+    - name: Fail if tests failed
       run: |
-        exit_code="${{ steps.test.outputs.exit_code }}"
-        if [ "$exit_code" -ne 0 ]; then
+        if [ -n "$exit_code" ] && [ "$exit_code" -ne 0 ]; then
           echo "Tests failed with exit code $exit_code."
           exit $exit_code
+        else
+          echo "Tests passed successfully."
         fi
+      shell: bash
+      env:
+        exit_code: ${{ env.exit_code }}
