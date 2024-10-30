@@ -1,5 +1,7 @@
 # Time-Sync-Tools
 
+[![codecov](https://codecov.io/gh/GabLeRoux/time-sync-tools/graph/badge.svg?token=VIWjPwKRvM)](https://codecov.io/gh/GabLeRoux/time-sync-tools)
+
 These tools provides a streamlined way to sync and manage time entries across multiple platforms, including Toggl, Wrike, Clockify, Jira and Google Sheets. This tool retrieves time entries from various platforms, processes them, and enables efficient project and task tracking across these applications. 
 
 _This is a technical project which requires you to understand the APIs of the services you are using. Don't execute commands blindly._
@@ -36,8 +38,8 @@ _This is a technical project which requires you to understand the APIs of the se
           * [Sync Wrike Tasks to Google Sheets](#sync-wrike-tasks-to-google-sheets)
           * [Sync Data from Google Sheets to Wrike](#sync-data-from-google-sheets-to-wrike)
       * [Jira](#jira)
-          * [Log time to a Jira task](#log-time-to-a-jira-task)
-          * [Delete all worklogs for a user on a specific day](#delete-all-worklogs-for-a-user-on-a-specific-day)
+        * [Log time to a Jira task](#log-time-to-a-jira-task)
+        * [Delete all worklogs for a user on a specific day](#delete-all-worklogs-for-a-user-on-a-specific-day)
   * [Development](#development)
     * [Managing dependencies](#managing-dependencies)
     * [Using local environment with uv](#using-local-environment-with-uv)
