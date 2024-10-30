@@ -196,7 +196,7 @@ Create time logs from Google Sheets data in Wrike:
 python main.py google_sheets.sheet_to_create_time_logs_from_data --title="SHEET_TITLE" --spreadsheet_id="YOUR_SPREADSHEET_ID" --dry_run=True
 ```
 
-Replace YOUR_SPREADSHEET_ID and SHEET_TITLE with the appropriate values. Use --dry_run=True for testing without making changes.
+Replace `YOUR_SPREADSHEET_ID` and `SHEET_TITLE` with the appropriate values. Use `--dry_run=True` for testing without making changes.
 
 #### Jira
 
