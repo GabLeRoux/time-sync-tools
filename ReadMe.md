@@ -99,13 +99,13 @@ Then update the `config.yaml` file with your Jira configuration details. You can
 Retrieve time entries for a specific date range:
 
 ```bash
-python main.py toggl.get_time_entries --start_date=YYYY-MM-DD --end_date=YYYY-MM-DD
+python main.py toggl get_time_entries --start_date=YYYY-MM-DD --end_date=YYYY-MM-DD
 ```
 
 Create a new time entry:
 
 ```bash
-python main.py toggl.add_time_entry --description="DESCRIPTION" --start_time="YYYY-MM-DDTHH:MM:SS" --end_time="YYYY-MM-DDTHH:MM:SS"
+python main.py toggl add_time_entry --description="DESCRIPTION" --start_time="YYYY-MM-DDTHH:MM:SS" --end_time="YYYY-MM-DDTHH:MM:SS"
 ```
 
 #### Wrike
@@ -113,25 +113,25 @@ python main.py toggl.add_time_entry --description="DESCRIPTION" --start_time="YY
 List all projects:
 
 ```bash
-python main.py wrike.list_all_projects
+python main.py wrike list_all_projects
 ```
 
 List all folders:
 
 ```bash
-python main.py wrike.list_all_folders
+python main.py wrike list_all_folders
 ```
 
 List all tasks:
 
 ```bash
-python main.py wrike.get_all_tasks
+python main.py wrike get_all_tasks
 ```
 
 Fetch a specific task by its ID:
 
 ```bash
-python main.py wrike.get_task_by_id --task_id=YOUR_TASK_ID
+python main.py wrike get_task_by_id --task_id=YOUR_TASK_ID
 ```
 
 Manage timelogs (list, create, delete) for tasks. See commands for details.
@@ -141,13 +141,13 @@ Manage timelogs (list, create, delete) for tasks. See commands for details.
 Retrieve time entries for a date range:
 
 ```bash
-python main.py clockify.get_time_entries --start_date=YYYY-MM-DD --end_date=YYYY-MM-DD
+python main.py clockify get_time_entries --start_date=YYYY-MM-DD --end_date=YYYY-MM-DD
 ```
 
 Create a new time entry:
 
 ```bash
-python main.py clockify.add_time_entry --description="DESCRIPTION" --start_time="YYYY-MM-DDTHH:MM:SS" --end_time="YYYY-MM-DDTHH:MM:SS"
+python main.py clockify add_time_entry --description="DESCRIPTION" --start_time="YYYY-MM-DDTHH:MM:SS" --end_time="YYYY-MM-DDTHH:MM:SS"
 ```
 
 #### OpenAI
@@ -155,13 +155,13 @@ python main.py clockify.add_time_entry --description="DESCRIPTION" --start_time=
 Find the closest match from a list of options:
 
 ```bash
-python main.py openai.find_closest_match --search_param="SEARCH_TERM" --options="option1,option2,option3"
+python main.py openai find_closest_match --search_param="SEARCH_TERM" --options="option1,option2,option3"
 ```
 
 Use a different model for matching:
 
 ```bash
-python main.py openai.find_closest_match --search_param="SEARCH_TERM" --options="option1,option2,option3" --model="MODEL_NAME"
+python main.py openai find_closest_match --search_param="SEARCH_TERM" --options="option1,option2,option3" --model="MODEL_NAME"
 ```
 
 #### Google Sheets
@@ -182,19 +182,19 @@ python main.py openai.find_closest_match --search_param="SEARCH_TERM" --options=
 Sync Wrike tasks to Google Sheets:
 
 ```bash
-python main.py google_sheets.sync_wrike_to_sheets --spreadsheet_id="YOUR_SPREADSHEET_ID"
+python main.py google_sheets sync_wrike_to_sheets --spreadsheet_id="YOUR_SPREADSHEET_ID"
 ```
 
 Fetch data from a Google Sheet:
 
 ```bash
-python main.py google_sheets.fetch_data_from_sheet --title="SHEET_TITLE" --spreadsheet_id="YOUR_SPREADSHEET_ID"
+python main.py google_sheets fetch_data_from_sheet --title="SHEET_TITLE" --spreadsheet_id="YOUR_SPREADSHEET_ID"
 ```
 
 Create time logs from Google Sheets data in Wrike:
 
 ```bash
-python main.py google_sheets.sheet_to_create_time_logs_from_data --title="SHEET_TITLE" --spreadsheet_id="YOUR_SPREADSHEET_ID" --dry_run=True
+python main.py google_sheets sheet_to_create_time_logs_from_data --title="SHEET_TITLE" --spreadsheet_id="YOUR_SPREADSHEET_ID" --dry_run=True
 ```
 
 Replace `YOUR_SPREADSHEET_ID` and `SHEET_TITLE` with the appropriate values. Use `--dry_run=True` for testing without making changes.
@@ -204,13 +204,13 @@ Replace `YOUR_SPREADSHEET_ID` and `SHEET_TITLE` with the appropriate values. Use
 Log time to a Jira task:
 
 ```bash
-python main.py jira.log_time_to_task --task_id="TASK_ID" --start_datetime="YYYY-MM-DD HH:MM:SS" --time_spent_seconds=SECONDS --comment="COMMENT"
+python main.py jira log_time_to_task --task_id="TASK_ID" --start_datetime="YYYY-MM-DD HH:MM:SS" --time_spent_seconds=SECONDS --comment="COMMENT"
 ```
 
 Delete all worklogs for a user on a specific day:
 
 ```bash
-python main.py jira.delete_all_worklogs_for_user_on_given_day --date="YYYY-MM-DD" --dry_run=True
+python main.py jira delete_all_worklogs_for_user_on_given_day --date="YYYY-MM-DD" --dry_run=True
 ```
 
 ## Development
