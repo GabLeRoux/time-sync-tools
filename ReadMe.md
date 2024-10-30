@@ -16,6 +16,7 @@ _This is a technical project which requires you to understand the APIs of the se
     * [Usage](#usage)
       * [Toggl](#toggl)
       * [Wrike](#wrike)
+      * [Clockify](#clockify)
       * [OpenAI](#openai)
       * [Google Sheets](#google-sheets)
         * [Obtaining `credentials.json`](#obtaining-credentialsjson)
@@ -135,7 +136,7 @@ python main.py wrike.get_task_by_id --task_id=YOUR_TASK_ID
 
 Manage timelogs (list, create, delete) for tasks. See commands for details.
 
-Clockify
+#### Clockify
 
 Retrieve time entries for a date range:
 
