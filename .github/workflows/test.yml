@@ -42,7 +42,9 @@ jobs:
         cp .env.example .env
 
     - name: Run tests
-      run: pytest --cov=./
+      run: |
+        source .venv/bin/activate
+        pytest --cov=./
 
     - name: Upload Coverage to Codecov
       uses: codecov/codecov-action@v4
