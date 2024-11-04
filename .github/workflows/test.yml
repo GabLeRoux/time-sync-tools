@@ -45,7 +45,7 @@ jobs:
     - name: Run tests
       run: |
         source .venv/bin/activate
-        pytest --cov=./ || exit_code=$?
+        pytest --cov --junitxml=junit.xml -o junit_family=legacy || exit_code=$?
         echo "exit_code=$exit_code" >> $GITHUB_ENV
 
     - name: Upload Coverage Report as Artifact
