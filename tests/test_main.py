@@ -8,15 +8,15 @@ import pytest
     [
         (
             ["python", "-m", "main", "toggl"],
-            "Toggl functions available",
+            "main.py toggl",
         ),  # Add expected output or part of it
         (
             ["python", "-m", "main", "wrike"],
-            "Wrike functions available",
+            "main.py wrike",
         ),  # Add expected output or part of it
         (
             ["python", "-m", "main", "openai"],
-            "OpenAI functions available",
+            "main.py openai",
         ),  # Add expected output or part of it
     ],
 )
