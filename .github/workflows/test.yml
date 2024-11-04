@@ -39,6 +39,7 @@ jobs:
     - name: Prepare environment
       run: |
         cp config.example.yaml config.yaml
+        cp config.yaml tests/config.yaml
         cp .env.example .env
 
     - name: Run tests
