@@ -1,83 +1,55 @@
 from unittest.mock import MagicMock, patch
+from src.openai import find_closest_match, OpenAIClient
 
-from src.openai import find_closest_match
 
-
-@patch("openai.Completion.create")
-def test_find_closest_match(mock_create):
-    mock_create.return_value = MagicMock(choices=[MagicMock(text="option 1")])
+def test_find_closest_match():
+    mock_client = MagicMock()
+    mock_client.get_ratings.return_value = {
+        "option 1": 90,
+        "option 2": 75,
+        "option 3": 50
+    }
 
     options = ["option 1", "option 2", "option 3"]
     prompt = "Find the closest option to this prompt"
 
-    result = find_closest_match(model="GPT-4", prompt=prompt, options=options)
+    result = find_closest_match(search_param=prompt, options=options, client=mock_client)
 
     assert result == "option 1"
-    mock_create.assert_called_once_with(
-        engine="GPT-4",
-        prompt=prompt,
-        max_tokens=1,
-        n=1,
-        stop=None,
-        temperature=0.7,
-        choices=options,
-    )
+    mock_client.get_ratings.assert_called_once_with(prompt, options, 0.7, 50)
 
 
-@patch("openai.Completion.create")
-def test_find_closest_match_no_choices(mock_create):
-    mock_create.return_value = MagicMock(choices=[])
+def test_find_closest_match_no_scores():
+    mock_client = MagicMock()
+    mock_client.get_ratings.return_value = {}
 
     options = ["option 1", "option 2", "option 3"]
     prompt = "Find the closest option to this prompt"
 
-    result = find_closest_match(model="GPT-4", prompt=prompt, options=options)
+    result = find_closest_match(search_param=prompt, options=options, client=mock_client)
 
     assert result is None
-    mock_create.assert_called_once_with(
-        engine="GPT-4",
-        prompt=prompt,
-        max_tokens=1,
-        n=1,
-        stop=None,
-        temperature=0.7,
-        choices=options,
-    )
+    mock_client.get_ratings.assert_called_once_with(prompt, options, 0.7, 50)
 
 
-@patch("openai.Completion.create")
-def test_find_closest_match_exception(mock_create):
-    mock_create.side_effect = Exception("Error while using OpenAI API")
+def test_find_closest_match_with_empty_options():
+    mock_client = MagicMock()
+    mock_client.get_ratings.return_value = {}
+
+    prompt = "Find the closest option to this prompt"
+    result = find_closest_match(search_param=prompt, options=[], client=mock_client)
+
+    assert result is None
+    mock_client.get_ratings.assert_called_once_with(prompt, [], 0.7, 50)
+
+
+def test_find_closest_match_exception():
+    mock_client = MagicMock()
+    mock_client.get_ratings.side_effect = Exception("API error")
 
     options = ["option 1", "option 2", "option 3"]
     prompt = "Find the closest option to this prompt"
 
-    result = find_closest_match(model="GPT-4", prompt=prompt, options=options)
+    result = find_closest_match(search_param=prompt, options=options, client=mock_client)
 
     assert result is None
-    mock_create.assert_called_once_with(
-        engine="GPT-4",
-        prompt=prompt,
-        max_tokens=1,
-        n=1,
-        stop=None,
-        temperature=0.7,
-        choices=options,
-    )
-
-
-@patch("openai.Completion.create")
-def test_find_closest_match_with_options_none(mock_create=None):
-    mock_create.return_value = MagicMock(choices=[])
-    prompt = "example"
-    result = find_closest_match(prompt=prompt)
-    assert result is None
-    mock_create.assert_called_once_with(
-        engine="GPT-4",
-        prompt=prompt,
-        max_tokens=1,
-        n=1,
-        stop=None,
-        temperature=0.7,
-        choices=[],
-    )

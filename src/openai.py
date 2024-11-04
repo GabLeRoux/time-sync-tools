@@ -1,60 +1,59 @@
-from typing import List, Optional
-
+from typing import List, Optional, Dict
 import openai
 
 
-def find_closest_match(
-    search_param: str,
-    options: List[str],
-    model: str = "gpt-4",
-    openai_api_key: Optional[str] = None,
-    temperature: Optional[float] = 0.7,
-    max_tokens: Optional[int] = 50,
-) -> str:
-    if openai_api_key:
-        openai.api_key = openai_api_key
+class OpenAIClient:
+    def __init__(self, api_key: Optional[str] = None, model: str = "gpt-4"):
+        self.model = model
+        if api_key:
+            openai.api_key = api_key
 
-    # Number of options to be rated in each API call
-    batch_size = 3
-    scores = {}
+    def get_ratings(self, prompt: str, options: List[str], temperature: float = 0.7, max_tokens: int = 50) -> Dict[
+        str, float]:
+        messages = [
+            {
+                "role": "system",
+                "content": "You are a helpful assistant. Rate the match between the search parameter and options from 1 to 100.",
+            }
+        ]
 
-    # Initial message
-    messages = [
-        {
-            "role": "system",
-            "content": "You are a helpful assistant. Please rate the match between search parameters and options from 1 to 100. Only respond with a number.",
-        }
-    ]
+        # Batch the options for fewer calls
+        for option in options:
+            messages.append({
+                "role": "user",
+                "content": f"Rate the match between '{prompt}' and '{option}' from 1 to 100.",
+            })
 
-    # Loop through the options in batches
-    for i in range(0, len(options), batch_size):
-        batched_options = options[i : i + batch_size]
-        for option in batched_options:
-            messages.append(
-                {
-                    "role": "user",
-                    "content": f"Rate the match between '{search_param}' and '{option}' from 1 to 100.",
-                }
-            )
-
-        # Make API call with the batched messages
         response = openai.ChatCompletion.create(
-            model=model,
+            model=self.model,
             messages=messages,
             temperature=temperature,
             max_tokens=max_tokens,
         )
 
-        # Extract scores from the response
-        for j, option in enumerate(batched_options):
+        scores = {}
+        for i, option in enumerate(options):
             try:
-                scores[option] = float(
-                    response["choices"][0]["message"]["role"] == "assistant"
-                    and response["choices"][0]["message"]["content"].split("\n")[j]
-                )
-            except:
+                content = response["choices"][0]["message"]["content"]
+                score = float(content.split("\n")[i])
+                scores[option] = score
+            except (IndexError, ValueError):
                 scores[option] = 0
-        print(f"Tokens used: {response['usage']['total_tokens']}")
 
-    # Return option with the highest score
-    return max(scores, key=scores.get)
+        return scores
+
+
+def find_closest_match(
+        search_param: str,
+        options: List[str],
+        client: OpenAIClient,
+        temperature: Optional[float] = 0.7,
+        max_tokens: Optional[int] = 50,
+) -> Optional[str]:
+    try:
+        scores = client.get_ratings(search_param, options, temperature, max_tokens)
+    except Exception as e:
+        print(f"Error occurred in get_ratings: {e}")
+        return None
+
+    return max(scores, key=scores.get, default=None)
