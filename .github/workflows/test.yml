@@ -45,7 +45,7 @@ jobs:
     - name: Run tests
       run: |
         source .venv/bin/activate
-        pytest --cov --junitxml=junit.xml -o junit_family=legacy --cov-report=html || exit_code=$?
+        pytest --cov --junitxml=junit.xml -o junit_family=legacy --cov-report=html --cov-report=xml || exit_code=$?
         echo "exit_code=$exit_code" >> $GITHUB_ENV
 
     - name: Upload Coverage Report as Artifact
@@ -53,6 +53,12 @@ jobs:
       with:
         name: code-coverage-report
         path: htmlcov/
+
+    - name: Upload results to Codecov
+      if: ${{ !cancelled() }}
+      uses: codecov/codecov-action@v4
+      with:
+        token: ${{ secrets.CODECOV_TOKEN }}
 
     - name: Upload test results to Codecov
       if: ${{ !cancelled() }}
