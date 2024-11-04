@@ -7,15 +7,15 @@ import pytest
     "command, expected_output",
     [
         (
-            ["python", "-m", "src.main", "toggl"],
+            ["python", "-m", "main", "toggl"],
             "Toggl functions available",
         ),  # Add expected output or part of it
         (
-            ["python", "-m", "src.main", "wrike"],
+            ["python", "-m", "main", "wrike"],
             "Wrike functions available",
         ),  # Add expected output or part of it
         (
-            ["python", "-m", "src.main", "openai"],
+            ["python", "-m", "main", "openai"],
             "OpenAI functions available",
         ),  # Add expected output or part of it
     ],
