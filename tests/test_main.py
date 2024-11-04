@@ -9,15 +9,27 @@ import pytest
         (
             ["python", "-m", "main", "toggl"],
             "main.py toggl",
-        ),  # Add expected output or part of it
+        ),
         (
             ["python", "-m", "main", "wrike"],
             "main.py wrike",
-        ),  # Add expected output or part of it
+        ),
         (
             ["python", "-m", "main", "openai"],
             "main.py openai",
-        ),  # Add expected output or part of it
+        ),
+        (
+            ["python", "-m", "main", "clockify"],
+            "main.py clockify",
+        ),
+        (
+            ["python", "-m", "main", "google_sheets"],
+            "main.py google_sheets",
+        ),
+        (
+            ["python", "-m", "main", "jira"],
+            "main.py jira",
+        ),
     ],
 )
 def test_fire_cli(command, expected_output):
