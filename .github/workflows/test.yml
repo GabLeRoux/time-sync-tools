@@ -54,11 +54,11 @@ jobs:
         name: code-coverage-report
         path: htmlcov/
 
-    - name: Upload Coverage to Codecov
-      uses: codecov/codecov-action@v4
+    - name: Upload test results to Codecov
+      if: ${{ !cancelled() }}
+      uses: codecov/test-results-action@v1
       with:
         token: ${{ secrets.CODECOV_TOKEN }}
-      if: always()
 
     - name: Fail if tests failed
       run: |
