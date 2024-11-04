@@ -10,6 +10,7 @@ from google.auth.transport.requests import Request
 from google_auth_oauthlib.flow import InstalledAppFlow
 from googleapiclient.discovery import Resource, build
 
+from src.config import DEFAULT_GOOGLE_SHEET_ID
 from src.jira import JiraAPI
 from src.wrike import create_time_logs_from_data, get_all_tasks
 
