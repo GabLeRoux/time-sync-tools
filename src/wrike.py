@@ -6,11 +6,10 @@ import requests
 from diskcache import Cache
 from halo import Halo
 
-from .config import WRIKE_ACCESS_TOKEN, WRIKE_API_URL
+from .config import WRIKE_ACCESS_TOKEN, WRIKE_API_URL, WRIKE_DISK_CACHE_DIR
 
 # Setup diskcache
-CACHE_DIR = "disk_cache_directory"
-cache = Cache(CACHE_DIR)
+cache = Cache(WRIKE_DISK_CACHE_DIR)
 
 
 def _validate_task_id(task_id):

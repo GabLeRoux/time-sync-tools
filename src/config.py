@@ -24,6 +24,7 @@ TOGGL_API_URL = os.environ.get("TOGGL_API_URL", "https://api.track.toggl.com/api
 WRIKE_ACCESS_TOKEN = os.environ.get("WRIKE_ACCESS_TOKEN")
 WRIKE_API_URL = os.environ.get("WRIKE_API_URL", "https://www.wrike.com/api/v4")
 WRIKE_USER_ID = os.environ.get("WRIKE_USER_ID")
+WRIKE_DISK_CACHE_DIR = os.getenv("WRIKE_DISK_CACHE_DIR", "disk_cache_directory")
 
 def load_yaml_config(filename="config.yaml"):
     with open(filename, "r") as file:
