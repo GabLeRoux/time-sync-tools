@@ -6,7 +6,7 @@ import requests
 from diskcache import Cache
 from halo import Halo
 
-from .config import WRIKE_ACCESS_TOKEN
+from .config import WRIKE_ACCESS_TOKEN, WRIKE_API_URL
 
 # Setup diskcache
 CACHE_DIR = "disk_cache_directory"
