@@ -181,3 +181,4 @@ pyrightconfig.json
 /token.pickle
 cache.db
 config.yaml
+junit.xml
