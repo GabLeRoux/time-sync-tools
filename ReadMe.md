@@ -72,7 +72,7 @@ This workflow uses Google Sheets as a review step, giving me control before sync
     - [**Wrike** API Token (OAuth 2.0 Authorization)](https://developers.wrike.com/oauth-20-authorization/)
     - [**Clockify** API key](https://clockify.me/developers-api)
     - [**OpenAI** API key](https://platform.openai.com/account/api-keys) (Optional)
-    - Google Sheets `credentials.json` for integration (see instructions below)
+    - **Google Sheets** `credentials.json` for integration (see instructions below)
     - [**Jira** API credentials](https://support.atlassian.com/atlassian-account/docs/manage-api-tokens-for-your-atlassian-account/) (Optional) 
 
 ### Installation
