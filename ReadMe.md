@@ -2,7 +2,7 @@
 
 [![codecov](https://codecov.io/gh/GabLeRoux/time-sync-tools/graph/badge.svg?token=VIWjPwKRvM)](https://codecov.io/gh/GabLeRoux/time-sync-tools)
 
-These tools provides a streamlined way to sync and manage time entries across multiple platforms, including Toggl, Wrike, Clockify, Jira and Google Sheets. This tool retrieves time entries from various platforms, processes them, and enables efficient project and task tracking across these applications. 
+These tools provide a streamlined way to sync and manage time entries across multiple platforms, including **Toggl**, **Wrike**, **Clockify**, **Jira** and **Google Sheets**. The tools retrieve time entries from various platforms, processes them, and enables efficient project and task tracking across different applications.
 
 _This is a technical project which requires you to understand the APIs of the services you are using. Don't execute commands blindly._
 
@@ -54,11 +54,11 @@ _This is a technical project which requires you to understand the APIs of the se
 
 Here's how I use this project.
 
-1. I track my time using Toggl or Clockify and use their **reporting tools** to export a **CSV file**.
-2. I manually import this CSV into Google Sheets (This part could be automated) with some predefined tabs.
-    * These predefined tabs allow me to manage and review my time entries from Toggl or Clockify as my “source of truth.”
-    * Recently, I switched from Toggl to Clockify but kept Toggl support in the project for others who may still use it. ;)
-3. After reviewing the data in Google Sheets, I run specific commands to sync these entries directly to Jira, Wrike, or other platforms.
+1. I track my time using **Toggl** or **Clockify** and use their **reporting tools** to export a **CSV file**.
+2. I _manually_ import this CSV into **Google Sheets** (This part could be automated) with some predefined tabs.
+    * These predefined Google Sheet tabs allow me to manage and review my time entries from Toggl or Clockify as my “source of truth.”
+    * I recently switched from Toggl to Clockify but kept Toggl support in the project for others who may want to use it. ;)
+3. After reviewing the data in Google Sheets, I run a `sync` command that reads data from Google Sheets and import them directly in **Jira**, **Wrike**, or other platforms.
 
 This workflow uses Google Sheets as a review step, giving me control before syncing data to other platforms.
 
@@ -71,9 +71,9 @@ This workflow uses Google Sheets as a review step, giving me control before sync
     - [**Toggl** API key](https://toggl.com/app/profile)
     - [**Wrike** API Token (OAuth 2.0 Authorization)](https://developers.wrike.com/oauth-20-authorization/)
     - [**Clockify** API key](https://clockify.me/developers-api)
-    - [**OpenAI** API key](https://platform.openai.com/account/api-keys)
-    - Google Sheets `credentials.json` for integration (see instructions below)
-    - (Optional) Jira API credentials
+    - [**OpenAI** API key](https://platform.openai.com/account/api-keys) (Optional)
+    - **Google Sheets** `credentials.json` for integration (see instructions below)
+    - [**Jira** API credentials](https://support.atlassian.com/atlassian-account/docs/manage-api-tokens-for-your-atlassian-account/) (Optional) 
 
 ### Installation
 
